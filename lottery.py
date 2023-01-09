@@ -27,6 +27,40 @@ def winning_calc(my_numbers, winning_numbers):
     white_matches = len(my_numbers["whites"].intersection(winning_numbers["whites"]))
     power_match = my_numbers["red"] == winning_numbers["red"]
 
+    if white_matches == 5:
+        if power_match:
+            win_amount = 2000000
+            times_won["5 Balls + Powerball"] += 1
+        else:
+            win_amount = 1000000
+            times_won["5 Balls"] += 1
+    elif white_matches == 4:
+        if power_match:
+            win_amount = 50000
+            times_won["4 Balls + Powerball"] += 1
+        else:
+            win_amount = 100
+            times_won["4 Balls"] += 1
+    elif white_matches == 3:
+        if power_match:
+            win_amount = 100
+            times_won["3 Balls + Powerball"] += 1
+        else:
+            win_amount = 7
+            times_won["3 Balls"] += 1
+    elif white_matches == 2 and power_match:
+        win_amount = 7
+        times_won["2 Balls + Powerball"] += 1
+    elif white_matches == 1 and power_match:
+        win_amount = 4
+        times_won["1 Ball + Powerball"] += 1
+    elif power_match:
+        win_amount = 4
+        times_won["0 Balls + Powerball"] += 1
+    else:
+        times_won["0 Balls"] += 1
+
+
     return win_amount
 
 for draw in range(num_draws):
