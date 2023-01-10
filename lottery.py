@@ -4,8 +4,8 @@ import json
 white_possibles = list(range(1, 70))
 red_possibles = list(range(1,27))
 
-tickets_per_draw = 1
-num_draws = 1
+tickets_per_draw = 100
+num_draws = 15600
 
 total_spent = 0
 winnings = 0
@@ -64,7 +64,12 @@ def winning_calc(my_numbers, winning_numbers):
 
     return win_amount
 
-for draw in range(num_draws):
+# for draw in range(num_draws):
+jackpot = False 
+draws = 0
+years  = 0
+while True:
+    draws += 1
     white_draw = set(random.sample(white_possibles, k=5))
     red_draw = random.choice(red_possibles)
 
@@ -81,6 +86,18 @@ for draw in range(num_draws):
     
         win_amount = winning_calc(my_numbers, winning_numbers)
         winnings += win_amount
+
+        if win_amount == 2000000:
+            jackpot = True
+            break
+
+    if draws % 156 == 0:
+        years += 1
+        print(f'{years} years')
+
+    if jackpot:
+        break
+
 
 print(f"Spent: £{total_spent}")
 print(f"Winnings: £{winnings}")
