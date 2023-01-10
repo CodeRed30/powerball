@@ -1,4 +1,5 @@
 import random
+import json
 
 white_possibles = list(range(1, 70))
 red_possibles = list(range(1,27))
@@ -7,7 +8,7 @@ tickets_per_draw = 1
 num_draws = 1
 
 total_spent = 0
-earnings = 0
+winnings = 0
 
 times_won = {
     "5 Balls + Powerball": 0,
@@ -78,5 +79,10 @@ for draw in range(num_draws):
         "whites": white_choices, "red": red_choice
         }
     
-    # winning_calc(my_numbers)
+        win_amount = winning_calc(my_numbers, winning_numbers)
+        winnings += win_amount
 
+print(f"Spent: £{total_spent}")
+print(f"Winnings: £{winnings}")
+
+print(json.dumps(times_won, indent=2))
